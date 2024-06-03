@@ -27,7 +27,4 @@ public class Follow {
     @JoinColumn(name = "followee_id", referencedColumnName = "user_id", nullable = false)
     private User followee;
 
-    @Column(name = "TIMESTAMP")
-    @CreationTimestamp
-    private LocalDateTime timestamp;
 }

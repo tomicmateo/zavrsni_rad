@@ -15,11 +15,11 @@
             <column name="password" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="email" type="VARCHAR(100)">
-                <constraints unique="true" nullable="false"/>
-            </column>
             <column name="profile-picture" type="BLOB" />
             <column name="bio" type="varchar(1000)" />
+            <column name="email" type="varchar(255)">
+                <constraints  unique="true" nullable="false" />
+            </column>
         </createTable>
     </changeSet>
 
@@ -112,9 +112,6 @@
                              referencedColumnNames="user_id"
                              nullable="false" />
             </column>
-            <!--<column name="timestamp" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
-                <constraints nullable="false" />
-            </column>-->
         </createTable>
     </changeSet>
 

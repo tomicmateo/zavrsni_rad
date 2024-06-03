@@ -1,2 +1,4 @@
-package project.fesb.SocialNetwork.model.api;public class CreateCommentRequest {
+package project.fesb.SocialNetwork.model.api;
+
+public class CreateCommentRequest {
 }

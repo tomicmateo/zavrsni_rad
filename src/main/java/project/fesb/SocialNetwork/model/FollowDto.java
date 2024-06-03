@@ -15,13 +15,11 @@ public class FollowDto {
     Long id;
     UserDto follower;
     UserDto followee;
-    LocalDateTime timestamp;
 
     public FollowDto (Follow follow)
     {
         this.id = follow.getId();
         this.follower = new UserDto(follow.getFollower());
         this.followee = new UserDto(follow.getFollowee());
-        this.timestamp = follow.getTimestamp();
     }
 }

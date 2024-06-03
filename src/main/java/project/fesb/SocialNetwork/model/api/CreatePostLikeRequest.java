@@ -1,2 +1,4 @@
-package project.fesb.SocialNetwork.model.api;public class CreatePostLikeRequest {
+package project.fesb.SocialNetwork.model.api;
+
+public class CreatePostLikeRequest {
 }
