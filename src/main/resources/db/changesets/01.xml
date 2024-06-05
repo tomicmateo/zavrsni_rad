@@ -115,5 +115,10 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="01-06" author="tomicmateo">
+        <renameColumn tableName="user" oldColumnName="profile-picture" newColumnName="profile_picture" columnDataType="BLOB" />
+    </changeSet>
+
+
 
 </databaseChangeLog>

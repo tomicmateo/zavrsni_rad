@@ -53,7 +53,7 @@ public class PostController {
 
     @PostMapping("/create")
     public String createPost(@RequestBody CreatePostRequest createPostRequest) {
-        UserDto user = userService.getUserByEmail("tomicmateo97@gmail.com");
+        UserDto user = userService.getUserByEmail("tomela@fesb.hr");
         PostDto postDto = postService.createPost(createPostRequest.getContent(), user);
         return postDto.getContent();
     }
