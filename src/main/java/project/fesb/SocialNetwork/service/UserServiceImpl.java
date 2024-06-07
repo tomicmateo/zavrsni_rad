@@ -41,5 +41,19 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             System.err.println("Error: No user found with email: " + email);
         }
-        return user;    }
+        return user;
+    }
+
+    @Override
+    public UserDto createUser(String username, String bio, String email, String password, byte[] profilePicture) {
+        User user = new User();
+        user.setUsername(username);
+        user.setBio(bio);
+        user.setEmail(email);
+        user.setPassword(password); // Remember to hash the password before saving
+        user.setProfilePicture(profilePicture);
+
+        User savedUser = userRepository.save(user);
+        return new UserDto(savedUser);
+    }
 }

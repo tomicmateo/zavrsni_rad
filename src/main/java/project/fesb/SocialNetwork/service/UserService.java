@@ -7,4 +7,5 @@ public interface UserService {
 
     UserDto getUserById(Long userId);
     UserDto getUserByEmail(String email);
+    UserDto createUser(String username, String bio, String email, String password, byte[] profilePicture);
 }

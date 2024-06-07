@@ -29,8 +29,15 @@ public class UserProfileController {
     }
 
     @PostMapping("/createUser")
-    public Long createAppUser(@RequestBody CreateUserRequest createUserRequest) {
-        return null; /*Jos nije implentirano*/
+    public Long createUser(@RequestBody CreateUserRequest createUserRequest) {
+        UserDto newUser = userService.createUser(
+                createUserRequest.getUsername(),
+                createUserRequest.getBio(),
+                createUserRequest.getEmail(),
+                createUserRequest.getPassword(),
+                createUserRequest.getProfilePicture()
+        );
+        return newUser.getId();
     }
 
     @PostMapping("/createFollow")

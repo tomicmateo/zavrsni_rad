@@ -8,6 +8,10 @@ public class CreateCommentRequest {
     public String getCommentText() {
         return commentText;
     }
-    public String getUserEmail() { return userEmail; }
-    public Long getPostId() { return postId; }
+    public String getUserEmail() {
+        return userEmail;
+    }
+    public Long getPostId() {
+        return postId;
+    }
 }
