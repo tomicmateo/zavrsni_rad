@@ -3,9 +3,7 @@ package project.fesb.SocialNetwork.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import project.fesb.SocialNetwork.model.jpa.app.User;
-import project.fesb.SocialNetwork.model.jpa.app.Post;
-import project.fesb.SocialNetwork.model.jpa.app.Like;
+import project.fesb.SocialNetwork.model.jpa.app.PostLike;
 
 import java.time.LocalDateTime;
 
@@ -17,11 +15,11 @@ public class LikeDto {
     UserDto user;
     LocalDateTime timestamp;
 
-    public LikeDto (Like Like)
+    public LikeDto (PostLike PostLike)
     {
-        this.setId(Like.getLikeId());
-        this.setUser(new UserDto(Like.getUser()));
-        this.setPost(new PostDto(Like.getPost()));
-        this.setTimestamp(Like.getTimestamp());
+        this.setId(PostLike.getLikeId());
+        this.setUser(new UserDto(PostLike.getUser()));
+        this.setPost(new PostDto(PostLike.getPost()));
+        this.setTimestamp(PostLike.getTimestamp());
     }
 }

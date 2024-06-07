@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "LIKE")
-public class Like implements Serializable {
+@Table(name = "POST_LIKE")
+public class PostLike implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -41,6 +41,7 @@ public class PostDaoImpl implements PostDao{
         }
         post.setUser(userDao.convertUserDtoToUserObject(postDto.getUser()));
         post.setContent(postDto.getContent());
+        post.setTimestamp(postDto.getTimestamp());
         return post;
     }
 
@@ -63,6 +64,9 @@ public class PostDaoImpl implements PostDao{
     @Override
     public List<PostDto> getPostsByUsername(String username) {
         UserDto user = userDao.getUserByUsername(username);
+        if (user == null) {
+            throw new EntityNotFoundException("User with username " + username + " not found");
+        }
         List<Post> postsByUser = postRepository.findAllByUser(userDao.convertUserDtoToUserObject(user));
         return postsByUser.stream()
                 .map(PostDto::new)

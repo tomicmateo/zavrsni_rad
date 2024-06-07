@@ -1,6 +1,5 @@
 package project.fesb.SocialNetwork.service;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.fesb.SocialNetwork.dao.PostLikeDao;
@@ -8,7 +7,6 @@ import project.fesb.SocialNetwork.dao.jpa.app.PostLikeRepository;
 import project.fesb.SocialNetwork.model.PostDto;
 import project.fesb.SocialNetwork.model.LikeDto;
 import project.fesb.SocialNetwork.model.UserDto;
-import project.fesb.SocialNetwork.model.jpa.app.Like;
 
 import java.util.List;
 

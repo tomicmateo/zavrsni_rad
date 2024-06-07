@@ -8,7 +8,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Getter
 @Setter
@@ -32,6 +31,7 @@ public class Post implements Serializable {
     @CreationTimestamp
     private LocalDateTime timestamp;
 
-
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PostLike> postLikes;
     /* TREBAS LI JOS NAPRAVIT ZA COLUMNS LIKES_COUNT I COMMENTS_COUNT???*/
 }

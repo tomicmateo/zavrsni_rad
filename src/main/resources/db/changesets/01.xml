@@ -46,7 +46,7 @@
         </createTable>
     </changeSet>
 
-    <!-- Entity<: Like -->
+    <!-- Entity<: PostLike -->
     <changeSet id="01-03" author="tomicmateo">
         <createTable tableName="like">
             <column name="like_id" type="bigint" autoIncrement="true">
@@ -119,6 +119,9 @@
         <renameColumn tableName="user" oldColumnName="profile-picture" newColumnName="profile_picture" columnDataType="BLOB" />
     </changeSet>
 
+    <changeSet id="01-07" author="tomicmateo">
+        <renameTable oldTableName="like" newTableName="post_like"/>
+    </changeSet>
 
 
 </databaseChangeLog>

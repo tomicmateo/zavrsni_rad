@@ -13,4 +13,5 @@ public interface PostDao {
 
     PostDto findById(Long postId);
     List<PostDto> findAll();
+
 }
