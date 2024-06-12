@@ -29,6 +29,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Long createComment(String content, UserDto userDto, PostDto postDto) {
         CommentDto commentDto = new CommentDto();
+        System.err.println("follow id: " + commentDto.getId());
 
         commentDto.setContent(content);
         commentDto.setUser(userDto);

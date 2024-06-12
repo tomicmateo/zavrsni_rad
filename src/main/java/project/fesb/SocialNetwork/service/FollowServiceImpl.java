@@ -25,14 +25,17 @@ public class FollowServiceImpl implements FollowService {
     }
 
     @Override
-    public FollowDto createFollow(UserDto follower, UserDto followee) {
+    public Long createFollow(UserDto follower, UserDto followee) {
+
         FollowDto followDto = new FollowDto();
+        System.err.println("follow id: " + followDto.getId());
+
+
         followDto.setFollower(follower);
         followDto.setFollowee(followee);
+        System.err.println("emails, follow :" + followDto.getFollower().getEmail() + followDto.getFollowee().getEmail());
 
-        Long followId = followDao.save(followDto);
-        followDto.setId(followId);
 
-        return followDto;
+        return followDao.save(followDto);
     }
 }

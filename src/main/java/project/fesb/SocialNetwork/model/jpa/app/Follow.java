@@ -6,13 +6,14 @@ import lombok.Setter;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "follow")
-public class Follow {
+public class Follow implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

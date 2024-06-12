@@ -123,5 +123,21 @@
         <renameTable oldTableName="like" newTableName="post_like"/>
     </changeSet>
 
+    <changeSet id="01-08" author="tomicmateo">
+        <addColumn tableName="follow">
+            <column name="id" type="bigint" >
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="01-09" author="tomicmateo">
+        <dropColumn tableName="follow" columnName="id"/>
+        <addColumn tableName="follow">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+        </addColumn>
+    </changeSet>
 
 </databaseChangeLog>

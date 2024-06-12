@@ -52,6 +52,8 @@ public class CommentDaoImpl implements CommentDao{
         try
         {
             Comment comment = commentRepository.save(convertCommentDtoToCommentObject(commentDto));
+            System.err.println("comment id daoimpl: " + comment.getCommentId());
+
             return comment.getCommentId();
         }
         catch (Exception e)

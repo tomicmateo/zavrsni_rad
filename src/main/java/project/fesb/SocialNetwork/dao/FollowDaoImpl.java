@@ -63,7 +63,16 @@ public class FollowDaoImpl implements FollowDao{
     public Long save(FollowDto followDto) {
         try
         {
+            System.err.println("follower email daoimpl: " + followDto.getFollower().getEmail());
+            System.err.println("followee email daoimpl: " + followDto.getFollowee().getEmail());
+            System.err.println("follow id daoimpl: " + followDto.getId());
+
             Follow follow = followRepository.save(convertFollowDtoToFollowObject(followDto));
+
+            System.err.println("follower email daoimpl: " + follow.getFollower().getEmail());
+            System.err.println("followee email daoimpl: " + follow.getFollowee().getEmail());
+            System.err.println("follow id daoimpl: " + follow.getId());
+
             return follow.getId();
         }
         catch (Exception e)

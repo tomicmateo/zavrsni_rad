@@ -56,4 +56,13 @@ public class UserServiceImpl implements UserService {
         User savedUser = userRepository.save(user);
         return new UserDto(savedUser);
     }
+
+    @Override
+    public UserDto getUserByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new RuntimeException("User not found with username: " + username);
+        }
+        return new UserDto(user);
+    }
 }

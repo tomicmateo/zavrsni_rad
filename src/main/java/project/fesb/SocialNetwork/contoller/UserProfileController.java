@@ -40,12 +40,4 @@ public class UserProfileController {
         return newUser.getId();
     }
 
-    @PostMapping("/createFollow")
-    public boolean createFollow(@RequestBody CreateFollowRequest createFollowRequest) {
-        UserDto userFollower = userService.getUserById(1L);
-        UserDto userFollowee = userService.getUserById(2L);
-
-        FollowDto followDto = followService.createFollow(userFollower, userFollowee);
-        return followDto.getId() != null;
-    }
 }

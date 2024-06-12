@@ -8,6 +8,7 @@ import project.fesb.SocialNetwork.model.PostDto;
 import project.fesb.SocialNetwork.model.UserDto;
 import project.fesb.SocialNetwork.model.jpa.app.User;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 
@@ -38,6 +39,7 @@ public class UserDaoImpl implements UserDao {
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
         user.setUserId(userDto.getId());
+        user.setProfilePicture(userDto.getProfilePicture());
         return user;
     }
 
