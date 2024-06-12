@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPost } from '../api/CreatePost';
 
 function CreatePost({ onClose }) {
   const [postText, setPostText] = useState('');

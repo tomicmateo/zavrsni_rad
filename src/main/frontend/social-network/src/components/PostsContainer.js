@@ -19,10 +19,14 @@ const PostsContainer = ({ userData }) => {
             })
     }, []);
 
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className='postContainer'>
             {posts.map((post) => (
-                <Post post={post} userData={userData} />
+                <Post key={post.id} post={post} userData={userData} />
             ))}
         </div>
     );

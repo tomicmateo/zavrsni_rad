@@ -1,9 +1,9 @@
 import axios from "axios";
 import { apiUrl } from "./Config";
 
-const createComment = async (createCommentRequest) => {
+const createPost = async (createPostRequest) => {
     try {
-        const response = await axios.post(`${apiUrl}/api/comment/create`, createCommentRequest);
+        const response = await axios.post(`${apiUrl}/api/post/create`, createPostRequest);
         console.log(response.data);
 
         return response.data;
@@ -14,4 +14,4 @@ const createComment = async (createCommentRequest) => {
     }
 };
 
-export { createComment };
+export { createPost };
