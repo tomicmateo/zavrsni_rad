@@ -57,11 +57,10 @@ public class PostController {
     }
 
     @PostMapping("/createPostLike")
-    public boolean createPostLike(@RequestBody CreatePostLikeRequest createPostLikeRequest){
-        UserDto user = userService.getUserById(1L);
-        PostDto post = postService.getPostById(1L);
+    public Long createPostLike(@RequestBody CreatePostLikeRequest createPostLikeRequest){
+        UserDto user = userService.getUserByEmail(createPostLikeRequest.getUserEmail());
+        PostDto post = postService.getPostById(createPostLikeRequest.getPostId());
 
-        LikeDto likeDto = postLikeService.createPostLike(user, post);
-        return true;
+        return postLikeService.createPostLike(user, post);
     }
 }

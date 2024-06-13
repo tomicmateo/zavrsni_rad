@@ -12,6 +12,7 @@ import project.fesb.SocialNetwork.service.UserService;
 
 @RestController
 @RequestMapping("/api/postLike")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PostLikeController {
     private final UserService userService;
     private final PostService postService;
@@ -25,25 +26,30 @@ public class PostLikeController {
     }
 
     @PostMapping("/create")
-    public boolean createPostLike(@RequestBody CreatePostLikeRequest createPostLikeRequest) {
+    public Long createPostLike(@RequestBody CreatePostLikeRequest createPostLikeRequest) {
         System.out.println("Received createPostLike request for userEmail: " + createPostLikeRequest.getUserEmail() + ", postId: " + createPostLikeRequest.getPostId());
 
         UserDto userDto = userService.getUserByEmail((createPostLikeRequest.getUserEmail()));
         if (userDto == null) {
             System.out.println("User not found with email: " + createPostLikeRequest.getUserEmail());
-            return false;
+            return null;
+        }
+        else {
+            System.out.println("User  found with email: " + createPostLikeRequest.getUserEmail());
+            System.out.println("User  found with username: " + userDto.getUsername());
+
         }
 
         PostDto postDto = postService.getPostById(createPostLikeRequest.getPostId());
         if (postDto == null) {
             System.out.println("Post not found with ID: " + createPostLikeRequest.getPostId());
-            return false;
+            return null;
         }
-
-        LikeDto likeDto = postLikeService.createPostLike(userDto, postDto);
-        boolean result = likeDto.getId() != null;
-        System.out.println("Like creation result: " + result);
-        return result;
+        else {
+            System.out.println("Post  found with ID: " + createPostLikeRequest.getPostId());
+            System.out.println("Post  found with content: " + postDto.getContent());
+        }
+        return postLikeService.createPostLike(userDto, postDto);
     }
 
     @GetMapping("/count/{postId}")

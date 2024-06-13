@@ -18,7 +18,6 @@ public class PostDto {
     private Long id;
     private String content;
     private UserDto user;
-    /*private List<Hashtag> hashtags;*/
     private LocalDateTime timestamp;
     private int numberOfLikes;
 
@@ -30,6 +29,14 @@ public class PostDto {
         this.setTimestamp(post.getTimestamp());
     }
 
+    public Post toEntity() {
+        Post post = new Post();
+        post.setPostId(this.getId());
+        post.setContent(this.getContent());
+        post.setTimestamp(this.getTimestamp());
+        // set other fields as necessary
+        return post;
+    }
     /*public PostDto (Post post, List<Hashtag> hashtags)
     {
         this.setId(post.getPostId());

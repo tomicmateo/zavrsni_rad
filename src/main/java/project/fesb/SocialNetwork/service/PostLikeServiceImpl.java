@@ -14,31 +14,29 @@ import java.util.List;
 public class PostLikeServiceImpl implements PostLikeService {
 
     private PostLikeDao postLikeDao;
-    private PostLikeRepository postLikeRepository;
+    private final PostLikeRepository postLikeRepository;
 
     @Autowired
-    public PostLikeServiceImpl(PostLikeDao postLikeDao,
+    public PostLikeServiceImpl(PostLikeDao postLikeDao, final
                                PostLikeRepository postLikeRepository) {
         this.postLikeDao = postLikeDao;
         this.postLikeRepository = postLikeRepository;
     }
 
     @Override
-    public LikeDto createPostLike(UserDto user, PostDto post) {
-        LikeDto postLikeDto = new LikeDto();
-        postLikeDto.setUser(user);
-        postLikeDto.setPost(post);
-        Long postLikeId = postLikeDao.save(postLikeDto);
-        postLikeDto.setId(postLikeId);
-        return postLikeDto;
+    public Long createPostLike(UserDto userDto, PostDto postDto) {
+        LikeDto likeDto = new LikeDto();
+        System.err.println("like id: " + likeDto.getId());
+
+        likeDto.setUser(userDto);
+        likeDto.setPost(postDto);
+
+        return postLikeDao.save(likeDto);
     }
 
     @Override
     public int numberOfLikesOnPost(Long postId) {
         List<LikeDto> likesOnPost = postLikeDao.getLikesByPostId(postId);
-        if (likesOnPost == null) {
-            return 0;
-        }
-        return likesOnPost.size();
+        return likesOnPost != null ? likesOnPost.size() : 0;
     }
 }

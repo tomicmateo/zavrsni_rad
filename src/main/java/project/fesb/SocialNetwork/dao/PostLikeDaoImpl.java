@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import project.fesb.SocialNetwork.dao.jpa.app.PostLikeRepository;
 import project.fesb.SocialNetwork.model.PostDto;
 import project.fesb.SocialNetwork.model.LikeDto;
+import project.fesb.SocialNetwork.model.UserDto;
 import project.fesb.SocialNetwork.model.jpa.app.PostLike;
 
 import java.util.List;
@@ -57,7 +58,9 @@ public class PostLikeDaoImpl implements PostLikeDao{
     public Long save(LikeDto postLikeDto) {
         try {
             PostLike postLike = postLikeRepository.save(convertPostLikeDtoToPostLikeObject(postLikeDto));
-            return postLike.getPost().getPostId();
+            System.err.println("like id daoimpl: " + postLike.getLikeId());
+
+            return postLike.getLikeId();
         } catch (Exception e) {
             e.printStackTrace();
         }

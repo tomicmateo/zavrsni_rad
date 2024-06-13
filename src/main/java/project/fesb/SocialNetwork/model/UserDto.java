@@ -24,4 +24,15 @@ public class UserDto {
         this.password = user.getPassword();
         this.profilePicture = user.getProfilePicture();
     }
+
+    public User toEntity() {
+        User user = new User();
+        user.setUserId(this.getId());
+        user.setEmail(this.getEmail());
+        user.setUsername(this.getUsername());
+        user.setPassword(this.getPassword());
+        user.setBio(this.getBio());
+        user.setProfilePicture(this.getProfilePicture());
+        return user;
+    }
 }
