@@ -45,7 +45,7 @@ function App() {
       )}
 
       {isUploadPopupVisible && (
-        <CreatePost onClose={handleCloseUploadPopup} />
+        <CreatePost onClose={handleCloseUploadPopup} userData={userData} />
       )}
 
       <PostsContainer userData={userData} onLogout={handleLogout} />

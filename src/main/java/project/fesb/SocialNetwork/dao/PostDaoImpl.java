@@ -34,10 +34,9 @@ public class PostDaoImpl implements PostDao{
 
     public Post convertPostDtoToPostObject(PostDto postDto)
     {
-        Post post = postRepository.findByPostId(postDto.getId()).orElse(null);
-        if(post == null)
-        {
-            post = new Post();
+        Post post = new Post();
+        if (postDto.getId() != null) {
+            post = postRepository.findByPostId(postDto.getId()).orElse(new Post());
         }
         post.setUser(userDao.convertUserDtoToUserObject(postDto.getUser()));
         post.setContent(postDto.getContent());
@@ -50,16 +49,15 @@ public class PostDaoImpl implements PostDao{
         try
         {
             Post post = postRepository.save(convertPostDtoToPostObject(postDto));
+            postDto.setId(post.getPostId());
             return post.getPostId();
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
-
         return null;
     }
-
 
     @Override
     public List<PostDto> getPostsByUsername(String username) {

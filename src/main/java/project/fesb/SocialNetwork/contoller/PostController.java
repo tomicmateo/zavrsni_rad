@@ -43,10 +43,8 @@ public class PostController {
         for (PostDto postDto : postDtoList) {
             int numberOfLikes = postLikeService.numberOfLikesOnPost(postDto.getId());
             postDto.setNumberOfLikes(numberOfLikes);
-
-            //int numberOfComments = 8;
         }
-        //TODO: napravit novi objekt u /api koji vraca post details. Npr, od usera nam treba samo username i avatar
+
         return postDtoList;
     }
 

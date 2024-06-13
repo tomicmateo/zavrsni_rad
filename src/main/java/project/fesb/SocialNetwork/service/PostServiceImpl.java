@@ -28,12 +28,8 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostDto updatePostContent(Long postId, String newPostContent) {
 
-        /*Implementation is missing
-
-        Ovo dole bi mozda trebalo raditi
         // Fetch the post by its ID
         PostDto postDto = postDao.findById(postId);
-
         if (postDto == null) {
             throw new EntityNotFoundException("Post with ID " + postId + " not found");
         }
@@ -46,10 +42,7 @@ public class PostServiceImpl implements PostService {
 
         // Return the updated PostDto
         return postDao.findById(updatedPostId);
-        */
 
-
-        return null;
     }
 
     @Override
