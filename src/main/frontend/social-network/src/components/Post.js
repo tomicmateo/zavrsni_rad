@@ -4,16 +4,14 @@ import CreateComment from './CreateComment';
 import { getComments } from '../api/Comment';
 import { likePost } from '../api/LikePost';
 
-
 function Post({ post, userData }) {
     const [isLoading, setLoading] = useState(true);
     const [comments, setComments] = useState([]);
     const [likes, setLikes] = useState(post.numberOfLikes || 0);
     const [isLiking, setIsLiking] = useState(false);
+    const [profilePicture, setProfilePicture] = useState(null);
 
     useEffect(() => {
-        // Pass post.postId as an argument to getComments
-
         getComments(post.id)
             .then(data => {
                 setLoading(false);
@@ -25,6 +23,14 @@ function Post({ post, userData }) {
             });
     }, [post.id]);
 
+    // Convert profilePicture from Base64 to data URL
+    useEffect(() => {
+        if (userData && userData.profilePicture) {
+            const base64String = userData.profilePicture;
+            setProfilePicture(`data:image/jpeg;base64,${base64String}`);
+        }
+    }, [userData]);
+
     const handleLike = async () => {
         if (!userData || !userData.email) {
             console.error('User data is missing or invalid.');
@@ -34,7 +40,7 @@ function Post({ post, userData }) {
         setIsLiking(true);
 
         try {
-            const result = await likePost(post.id, userData.email); //mislin da vamo triba poslat userData.email a ne id
+            const result = await likePost(post.id, userData.email);
             if (result) {
                 setLikes(likes + 1);
             } else {
@@ -50,7 +56,11 @@ function Post({ post, userData }) {
     return (
         <div className='post'>
             <div className='userDetails'>
-                <img className='userImg' src={post.user.avatar} alt={`User ${post.user.username}`} /> 
+                <img 
+                    className='userImg' 
+                    src={profilePicture || post.user.avatar} 
+                    alt={`User ${post.user.username}`} 
+                />
                 <div className='user'>{post.user.username}</div>
             </div>
 
@@ -63,7 +73,6 @@ function Post({ post, userData }) {
                 {isLiking ? 'Liking...' : `LIKE (${likes})`}
             </button>
             <div className='createCommentContainer'><CreateComment post={post} userData={userData} /></div>
-            {/* Map over the comments to display them */}
             <div className='commentsContainer'>
                 {isLoading ? <div>Loading comments...</div> : (
                     comments.map((comment, index) => (

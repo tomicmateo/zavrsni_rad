@@ -35,7 +35,7 @@ function LoginRegisterPopup({ onClose, onLoginSuccess }) {
     };
 
 
-        const handleRegister = async () => {
+    const handleRegister = async () => {
         try {
             const formData = new FormData();
             formData.append('username', username);
@@ -44,9 +44,7 @@ function LoginRegisterPopup({ onClose, onLoginSuccess }) {
             formData.append('password', password);
     
             if (profilePicture) {
-                // Convert profile picture to Blob
-                const profilePictureBlob = await fetch(URL.createObjectURL(profilePicture)).then(res => res.blob());
-                formData.append('profilePicture', profilePictureBlob);
+                formData.append('profilePicture', profilePicture);
             }
     
             const response = await registerUser(formData);
@@ -60,6 +58,7 @@ function LoginRegisterPopup({ onClose, onLoginSuccess }) {
         } catch (error) {
             console.error('Error:', error);
         }
+    
     };
 
     const toggleForm = (type) => {

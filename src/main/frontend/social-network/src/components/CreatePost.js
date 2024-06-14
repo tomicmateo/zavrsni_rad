@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createPost } from '../api/CreatePost';
 
-function CreatePost({ onClose, userData }) {
+function CreatePost({ onClose, userData }) { //primauser data
   const [postText, setPostText] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -12,6 +12,7 @@ function CreatePost({ onClose, userData }) {
   const handlePostSubmit = async () => {
     if (!userData || !userData.id) {
       console.error('User data is missing or invalid.');
+
       return;
     }
 
@@ -30,6 +31,7 @@ function CreatePost({ onClose, userData }) {
         // Optionally clear the text area
         setPostText('');
         // Optionally trigger any callback to refresh posts list
+
       } else {
         console.log('Failed to create post');
       }

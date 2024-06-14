@@ -11,6 +11,5 @@ public interface PostService {
     PostDto updatePostContent(Long postId, String newPostContent);
     List<PostDto> getAllPostDetails();
     PostDto createPost(String newPostContent, UserDto user);
-
     PostDto getPostById(Long id);
 }

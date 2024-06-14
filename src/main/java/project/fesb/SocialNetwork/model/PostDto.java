@@ -34,6 +34,7 @@ public class PostDto {
         post.setPostId(this.getId());
         post.setContent(this.getContent());
         post.setTimestamp(this.getTimestamp());
+        post.setUser(this.getUser().toEntity());
         // set other fields as necessary
         return post;
     }

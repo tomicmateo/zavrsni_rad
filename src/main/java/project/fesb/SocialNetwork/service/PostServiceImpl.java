@@ -66,4 +66,13 @@ public class PostServiceImpl implements PostService {
         }
         return postDao.findById(postId);
     }
+
+    public String getPostOwnerUsername(Long postId) {
+        Post post = postDao.findById(postId).toEntity();
+        if (post == null) {
+            throw new RuntimeException("Post not found with ID: " + postId);
+        }
+
+        return post.getUser().getUsername();
+    }
 }

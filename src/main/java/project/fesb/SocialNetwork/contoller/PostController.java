@@ -12,8 +12,11 @@ import project.fesb.SocialNetwork.service.UserService;
 import project.fesb.SocialNetwork.service.CommentService;
 import project.fesb.SocialNetwork.service.PostLikeService;
 import project.fesb.SocialNetwork.service.PostService;
+import org.springframework.http.ResponseEntity;
+
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/post")
@@ -51,7 +54,7 @@ public class PostController {
 
     @PostMapping("/create")
     public String createPost(@RequestBody CreatePostRequest createPostRequest) {
-        UserDto user = userService.getUserByEmail("tomela@fesb.hr");
+        UserDto user = userService.getUserById(createPostRequest.getUserId());
         PostDto postDto = postService.createPost(createPostRequest.getContent(), user);
         return postDto.getContent();
     }
@@ -63,4 +66,5 @@ public class PostController {
 
         return postLikeService.createPostLike(user, post);
     }
+
 }

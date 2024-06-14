@@ -19,7 +19,7 @@ function App() {
     setUploadPopupVisible(false);
   };
 
-  const handleLoginSuccess = (user) => {
+  const handleLoginSuccess = (user) => {  //sta je ovaj user
     setUserData(user); // Store user data
     setLoginRegisterPopupVisible(false); // Hide the login/register popup after successful login
   };
