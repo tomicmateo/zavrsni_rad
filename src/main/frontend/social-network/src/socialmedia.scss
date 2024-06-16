@@ -1,6 +1,7 @@
 $base-color: #5a5a5a;
 $secondary-color: #d0d0d0;
 
+
 .appContainer {
   .popupBackdrop {
     position: fixed;
@@ -15,6 +16,21 @@ $secondary-color: #d0d0d0;
     /* Ensure it's below the popup */
     cursor: pointer;
     /* Make it clickable to close the popup */
+  }
+
+  .uploadButton {
+    background-color: #256dbb;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #0056b3;
+        }
   }
 
   .popup {
@@ -132,10 +148,12 @@ $secondary-color: #d0d0d0;
     color: white;
     padding: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     z-index: 1000;
   }
+
+  
 
   $base-color: #5a5a5a;
   $secondary-color: #d0d0d0;
@@ -223,7 +241,8 @@ $secondary-color: #d0d0d0;
     column-gap: 10px;
 
     .post {
-      max-width: 40%;
+      max-width: 60%;
+      min-width: 40%;;
       background-color: white;
       border-radius: 10px;
       padding: 10px;
@@ -231,6 +250,7 @@ $secondary-color: #d0d0d0;
       .userDetails {
         display: flex;
         align-items: center;
+        align-content: space-around;
 
         .userImg {
           width: 50px;
@@ -251,16 +271,22 @@ $secondary-color: #d0d0d0;
         font-weight: 500;
         text-align: justify;
         padding: 10px;
+        background-color: #f8f0ac;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        border-style: solid;
+        border-color: black;
+        border-width: 2px;
       }
 
       .postLikeButton {
-        padding: 10px 20px;
-        background-color: #007bff;
+        padding: 10px 10px;
+        background-color: #256dbb;
         color: white;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 10px;
       }
 
       .postLikeButton:hover {
@@ -268,11 +294,10 @@ $secondary-color: #d0d0d0;
       }
 
       .createComment {
-        margin-top: 20px;
+        margin-top: 10px;
         padding: 10px;
         width: 100%;
-        display: flex;
-        
+        display: flex;        
         align-items: center;
 
         .commentInput {
@@ -285,13 +310,15 @@ $secondary-color: #d0d0d0;
         }
 
         .postButton {
-          padding: 10px 20px;
-          background-color: #007bff;
+          padding: 10px 15px;
+          background-color: #256dbb;
           color: white;
           border: none;
           border-radius: 5px;
           cursor: pointer;
-          font-size: 16px;
+          font-size: 14px;
+          margin-left: 10px;
+          margin-right: 10px;
         }
 
         .postButton:hover {
@@ -309,27 +336,30 @@ $secondary-color: #d0d0d0;
         /* Align comments to the left */
         gap: 10px;
         /* Add spacing between comments */
+        
 
         .commentContainer {
           margin-top: 8px;
+          margin-right: 5px;
           box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
           padding: 10px;
           border-radius: 8px;
-          background-color: #f7f7f7;
+          background-color: #afa9c8;
           width: 100%;
           /* Match the width of the parent .commentsContainer */
+          
 
           .userComment {
             font-weight: 600;
             font-size: 16px;
-            color: #555;
-            letter-spacing: 1px;
+            color: #070707;
+            letter-spacing: 0.5px;
             margin-right: 8px;
           }
 
           .commentText {
-            font-size: 18px;
-            color: #333;
+            font-size: 14px;
+            color: #000000;
           }
         }
       }
