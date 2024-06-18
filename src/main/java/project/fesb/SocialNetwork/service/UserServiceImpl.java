@@ -22,18 +22,18 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
         this.userRepository = userRepository;
     }
-
     @Override
     public int numberOfPostsByUser (String username) {
         List<PostDto> postsByUser = userDao.getPostsByUser(username);
         return postsByUser.size();
     }
-
     @Override
     public UserDto getUserById(Long userId) {
-        return userDao.getUserById(userId);
+        User user = userRepository.findByUserId(userId).orElse(null);
+        if (user == null) {
+            System.err.println("Error: No user found with id: " + userId);    /*OVA FUNKCIJA BACA GREŠKU*/    }
+        return new UserDto(user);
     }
-
     @Override
     public UserDto getUserByEmail(String email) {
         UserDto user = userDao.getUser(email);
@@ -43,7 +43,6 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
-
     @Override
     public UserDto createUser(String username, String bio, String email, String password, byte[] profilePicture) {
         User user = new User();
@@ -56,7 +55,6 @@ public class UserServiceImpl implements UserService {
         User savedUser = userRepository.save(user);
         return new UserDto(savedUser);
     }
-
     @Override
     public UserDto getUserByUsername(String username) {
         User user = userRepository.findByUsername(username);

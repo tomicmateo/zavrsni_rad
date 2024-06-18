@@ -26,11 +26,19 @@ public class FollowController {
 
     @PostMapping("/createFollow")
     public Long createFollow(@RequestBody CreateFollowRequest createFollowRequest) {
-        UserDto follower = userService.getUserByEmail(createFollowRequest.getFollowerEmail());
-        UserDto followee = userService.getUserByEmail(createFollowRequest.getFolloweeEmail());
-        System.err.println("emails:" + follower.getEmail() + followee.getEmail());
+        System.out.println("Received createFollow request for ID's : " + createFollowRequest.getFollowerId()  + createFollowRequest.getFolloweeId());
 
 
-        return followService.createFollow(follower, followee);
+        if (createFollowRequest.getFollowerId() == null || createFollowRequest.getFolloweeId() == null) {
+            System.out.println("Follower ID and Followee ID must be provided");
+        }
+
+        UserDto follower = userService.getUserById(createFollowRequest.getFollowerId());
+        UserDto followee = userService.getUserById(createFollowRequest.getFolloweeId());
+
+
+        Long followId = followService.createFollow(follower, followee);
+
+        return followId;
     }
 }

@@ -3,6 +3,7 @@ import Comment from './Comment';
 import CreateComment from './CreateComment';
 import { getComments } from '../api/Comment';
 import { likePost } from '../api/LikePost';
+import { followUser } from '../api/FollowPost';
 
 function Post({ post, userData }) {
     const [isLoading, setLoading] = useState(true);
@@ -10,6 +11,8 @@ function Post({ post, userData }) {
     const [likes, setLikes] = useState(post.numberOfLikes || 0);
     const [isLiking, setIsLiking] = useState(false);
     const [profilePicture, setProfilePicture] = useState(null);
+    const [isFollowing, setIsFollowing] = useState(false);
+    const [follows, setFollows] = useState(post.user.numberOfFollowers || 0);
 
     useEffect(() => {
         getComments(post.id)
@@ -30,6 +33,8 @@ function Post({ post, userData }) {
             setProfilePicture(`data:image/jpeg;base64,${base64String}`);
         }
     }, [userData]);
+
+    
 
     const handleLike = async () => {
         if (!userData || !userData.email) {
@@ -53,6 +58,28 @@ function Post({ post, userData }) {
         }
     };
 
+    const handleFollow = async () => {
+        if (!userData || !userData.email) {
+            console.error('User data is missing or invalid.');
+            return;
+        }
+
+        setIsFollowing(true);
+        console.log("Provjera vrijednosti Id", post.user.id, userData.id)
+        try {
+            const result = await followUser(post.user.id, userData.id);
+            if (result) {
+                setFollows(follows + 1);
+            } else {
+                console.log('Failed to follow the user');
+            }
+        } catch (error) {
+            console.error('Error following the user:', error);
+        } finally {
+            setIsFollowing(false);
+        }
+    };
+
     return (
         <div className='post'>
             <div className='userDetails'>
@@ -62,6 +89,13 @@ function Post({ post, userData }) {
                     alt={`User ${post.user.username}`} 
                 />
                 <div className='user'>{post.user.username}</div>
+                <button 
+                    className='followButton'
+                    onClick={handleFollow}
+                    disabled={isFollowing}
+                    >
+                        {isFollowing? 'Following...' : `FOLLOW (${follows})`}
+                </button>
             </div>
 
             <div className='postText'>{post.content}</div>

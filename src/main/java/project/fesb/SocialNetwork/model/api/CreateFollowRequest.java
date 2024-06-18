@@ -2,22 +2,31 @@ package project.fesb.SocialNetwork.model.api;
 
 public class CreateFollowRequest {
 
-    private String followerEmail;
-    private String followeeEmail;
+    private Long followId;
+    private Long followerId;
+    private Long followeeId;
 
-    public String getFollowerEmail() {
-        return followerEmail;
+    public Long getFollowId() {
+        return followId;
     }
 
-    public String getFolloweeEmail() {
-        return followeeEmail;
+    public Long getFollowerId() {
+        return followerId;
     }
 
-    public void setFollowerEmail(String followerEmail) {
-        this.followerEmail = followerEmail;
+    public Long getFolloweeId() {
+        return followeeId;
     }
 
-    public void setFolloweeEmail(String followeeEmail) {
-        this.followeeEmail = followeeEmail;
+    public void setFollowId(Long followId) {
+        this.followId = followId;
+    }
+
+    public void setFollowerId(Long followerId) {
+        this.followerId = followerId;
+    }
+
+    public void setFolloweeId(Long followeeId) {
+        this.followeeId = followeeId;
     }
 }

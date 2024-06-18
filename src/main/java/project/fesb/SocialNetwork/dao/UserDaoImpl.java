@@ -75,7 +75,9 @@ public class UserDaoImpl implements UserDao {
     @Override
     public UserDto getUserById(Long userId) {
         User user = userRepository.findByUserId(userId).orElse(null);
-        assert user != null;
+        if (user == null) {
+            throw new EntityNotFoundException("User not found with ID UserDaoImpl: " + userId);
+        }
         return new UserDto(user);
     }
 

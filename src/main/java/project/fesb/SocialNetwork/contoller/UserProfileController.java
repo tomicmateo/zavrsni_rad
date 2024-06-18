@@ -24,12 +24,10 @@ public class UserProfileController {
         this.userService = userService;
         this.followService = followService;
     }
-
     @GetMapping("/user/{userEmail}")
     public UserDto getUser(@PathVariable("userEmail") String email) {
         return userService.getUserByEmail(email);
     }
-
     @PostMapping("/createUser")
     public Long createUser(@RequestParam("username") String username,
                            @RequestParam("bio") String bio,
@@ -47,5 +45,4 @@ public class UserProfileController {
         UserDto newUser = userService.createUser(username, bio, email, password, profilePictureBytes);
         return newUser.getId();
     }
-
 }
