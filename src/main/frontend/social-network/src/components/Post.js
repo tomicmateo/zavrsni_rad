@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Comment from "./Comment";
 import CreateComment from "./CreateComment";
 import { getComments } from "../api/Comment";
-import { likePost } from "../api/LikePost";
-import { followUser } from "../api/FollowPost";
+import { likePost, hasLikedPost } from "../api/LikePost";
+import { followUser, hasFollowedUser } from "../api/FollowPost";
 
 function Post({ post, userData }) {
   const [isLoading, setLoading] = useState(true);
@@ -15,19 +15,23 @@ function Post({ post, userData }) {
   const [isFollowing, setIsFollowing] = useState(false);
   const [follows, setFollows] = useState(post.user.numberOfFollowers || 0);
 
+  const [hasLiked, setHasLiked] = useState(false);
+  const [hasFollowed, setHasFollowed] = useState(false);
+
   useEffect(() => {
-    getComments(post.id)
-      .then((data) => {
-        setLoading(false);
+    const fetchComments = async () => {
+      try {
+        const data = await getComments(post.id);
         setComments(data);
-      })
-      .catch((error) => {
-        console.log("Error happened:");
-        console.log(error);
-      });
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+      }
+    };
+
+    fetchComments();
   }, [post.id]);
 
-  // Convert profilePicture from Base64 to data URL
   useEffect(() => {
     if (userData && userData.profilePicture) {
       const base64String = userData.profilePicture;
@@ -43,9 +47,31 @@ function Post({ post, userData }) {
     }
   }, [post]);
 
+  useEffect(() => {
+    const checkUserInteractions = async () => {
+      if (userData && userData.email) {
+        try {
+          const liked = await hasLikedPost(post.id, userData.email);
+          const followed = await hasFollowedUser(userData.id, post.user.id);
+          setHasLiked(liked);
+          setHasFollowed(followed);
+        } catch (error) {
+          console.error("Error checking user interactions:", error);
+        }
+      }
+    };
+
+    checkUserInteractions();
+  }, [userData, post.id, post.user.id]);
+
   const handleLike = async () => {
     if (!userData || !userData.email) {
       console.error("User data is missing or invalid.");
+      return;
+    }
+
+    if (hasLiked) {
+      console.log("You have already liked this post.");
       return;
     }
 
@@ -55,6 +81,7 @@ function Post({ post, userData }) {
       const result = await likePost(post.id, userData.email);
       if (result) {
         setLikes(likes + 1);
+        setHasLiked(true);
       } else {
         console.log("Failed to like the post");
       }
@@ -71,12 +98,18 @@ function Post({ post, userData }) {
       return;
     }
 
+    if (hasFollowed) {
+      console.log("You have already followed this user.");
+      return;
+    }
+
     setIsFollowing(true);
-    console.log("Provjera vrijednosti Id", post.user.id, userData.id);
+
     try {
       const result = await followUser(post.user.id, userData.id);
       if (result) {
         setFollows(follows + 1);
+        setHasFollowed(true);
       } else {
         console.log("Failed to follow the user");
       }
@@ -84,6 +117,18 @@ function Post({ post, userData }) {
       console.error("Error following the user:", error);
     } finally {
       setIsFollowing(false);
+    }
+  };
+
+  const handleNewComment = async () => {
+    setLoading(true);
+    try {
+      const data = await getComments(post.id);
+      setComments(data);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -99,9 +144,13 @@ function Post({ post, userData }) {
         <button
           className="followButton"
           onClick={handleFollow}
-          disabled={isFollowing}
+          disabled={isFollowing || hasFollowed}
         >
-          {isFollowing ? "Following..." : `FOLLOW (${follows})`}
+          {isFollowing
+            ? "Following..."
+            : hasFollowed
+            ? `FOLLOWED (${follows})`
+            : `FOLLOW (${follows})`}
         </button>
       </div>
 
@@ -109,12 +158,20 @@ function Post({ post, userData }) {
       <button
         className="postLikeButton"
         onClick={handleLike}
-        disabled={isLiking}
+        disabled={isLiking || hasLiked}
       >
-        {isLiking ? "Liking..." : `LIKE (${likes})`}
+        {isLiking
+          ? "Liking..."
+          : hasLiked
+          ? `LIKED (${likes})`
+          : `LIKE (${likes})`}
       </button>
       <div className="createCommentContainer">
-        <CreateComment post={post} userData={userData} />
+        <CreateComment
+          post={post}
+          userData={userData}
+          onNewComment={handleNewComment}
+        />
       </div>
       <div className="commentsContainer">
         {isLoading ? (
