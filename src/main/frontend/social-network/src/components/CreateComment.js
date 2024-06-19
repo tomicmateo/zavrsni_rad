@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { createComment } from "../api/CreateComment";
 
-const CreateComment = ({ post, userData }) => {
+const CreateComment = ({ post, userData, onNewComment }) => {
   const [comment, setComment] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleCommentChange = (event) => {
     setComment(event.target.value);
   };
@@ -15,17 +17,22 @@ const CreateComment = ({ post, userData }) => {
         postId: post.id,
       };
 
+      setIsSubmitting(true);
+
       try {
         const response = await createComment(commentData);
         if (response) {
           console.log("Comment posted successfully");
+          onNewComment(); // Notify the parent component
+          setComment(""); // Clear the input
         } else {
           console.error("Failed to post comment");
         }
       } catch (error) {
         console.error("Error:", error);
+      } finally {
+        setIsSubmitting(false);
       }
-      setComment("");
     }
   };
 
@@ -36,9 +43,14 @@ const CreateComment = ({ post, userData }) => {
         placeholder="Write a comment..."
         value={comment}
         onChange={handleCommentChange}
+        disabled={isSubmitting}
       />
-      <button className="postButton" onClick={handlePostComment}>
-        Post
+      <button
+        className="postButton"
+        onClick={handlePostComment}
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? "Posting..." : "Post"}
       </button>
     </div>
   );
