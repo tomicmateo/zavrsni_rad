@@ -46,13 +46,14 @@ $secondary-color: #d0d0d0;
     z-index: 1000;
 
     .popup-content {
-      background-color: white;
+      background-color: rgb(162, 200, 228);
       padding: 20px;
       border-radius: 5px;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
       text-align: center;
       width: 80%;
       max-width: 400px;
+      border: solid black 2px;
 
       h2 {
         font-size: 24px;
@@ -67,6 +68,7 @@ $secondary-color: #d0d0d0;
         .form-group {
           margin-bottom: 20px;
           text-align: left;
+          
 
           label {
             display: block;
@@ -82,11 +84,14 @@ $secondary-color: #d0d0d0;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 14px;
             outline: none;
+            
 
             &::placeholder {
-              color: #ccc;
+              color: #787171;
+              font-size: 14px;
+              border-radius: 5px;
             }
           }
 
@@ -97,7 +102,7 @@ $secondary-color: #d0d0d0;
 
         .form-actions {
           button[type="button"] {
-            background-color: #007bff;
+            background-color: #b72856;
             color: white;
             border: none;
             border-radius: 5px;
