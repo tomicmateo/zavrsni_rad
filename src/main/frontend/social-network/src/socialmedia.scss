@@ -1,0 +1,373 @@
+$base-color: #5a5a5a;
+$secondary-color: #d0d0d0;
+
+
+.appContainer {
+  .popupBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    /* Add a blur effect */
+    z-index: 999;
+    /* Ensure it's below the popup */
+    cursor: pointer;
+    /* Make it clickable to close the popup */
+  }
+
+  .uploadButton {
+    background-color: #256dbb;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #0056b3;
+        }
+  }
+
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    .popup-content {
+      background-color: rgb(162, 200, 228);
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 80%;
+      max-width: 400px;
+      border: solid black 2px;
+
+      h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .form-group {
+          margin-bottom: 20px;
+          text-align: left;
+          
+
+          label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+          }
+
+          input[type="email"],
+          input[type="password"],
+          select,
+          input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            outline: none;
+            
+
+            &::placeholder {
+              color: #787171;
+              font-size: 14px;
+              border-radius: 5px;
+            }
+          }
+
+          select {
+            appearance: none;
+          }
+        }
+
+        .form-actions {
+          button[type="button"] {
+            background-color: #b72856;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+
+            &:hover {
+              background-color: #0056b3;
+            }
+          }
+
+          p {
+            font-size: 14px;
+            margin-top: 10px;
+
+            span {
+              color: #007bff;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      .guestModeButton {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        color: #007bff;
+        margin-top: 10px;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  
+
+  $base-color: #5a5a5a;
+  $secondary-color: #d0d0d0;
+
+  .popupCreatePost {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    &-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 80%;
+      max-width: 400px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      textarea {
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid $secondary-color;
+        border-radius: 5px;
+        resize: none;
+        font-size: 16px;
+
+        &:focus {
+          outline: none;
+          border-color: $base-color;
+        }
+      }
+
+      button[type="button"] {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+
+    button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      color: #007bff;
+      margin-top: 10px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .postContainer {
+
+    display: grid;
+    place-items: center;
+    row-gap: 10px;
+    column-gap: 10px;
+
+    .post {
+      max-width: 60%;
+      min-width: 40%;;
+      background-color: white;
+      border-radius: 10px;
+      padding: 10px;
+
+      .userDetails {
+        display: flex;
+        align-items: center;
+        align-content: space-around;
+
+        .userImg {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          padding: 10px;
+        }
+
+        .user {
+          padding: 10px;
+          font-size: 20px;
+          font-weight: bold;
+        }
+      }
+
+      .postText {
+        font-size: 20px;
+        font-weight: 500;
+        text-align: justify;
+        padding: 10px;
+        background-color: #f8f0ac;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        border-style: solid;
+        border-color: black;
+        border-width: 2px;
+      }
+
+      .postLikeButton {
+        padding: 10px 10px;
+        background-color: #256dbb;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 10px;
+      }
+
+      .postLikeButton:hover {
+        background-color: #0056b3;
+      }
+
+      .createComment {
+        margin-top: 10px;
+        padding: 10px;
+        width: 100%;
+        display: flex;        
+        align-items: center;
+
+        .commentInput {
+          flex: 1;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          resize: none;
+          font-size: 16px;
+        }
+
+        .postButton {
+          padding: 10px 15px;
+          background-color: #256dbb;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 14px;
+          margin-left: 10px;
+          margin-right: 10px;
+        }
+
+        .postButton:hover {
+          background-color: #0056b3;
+        }
+      }
+
+      .commentsContainer {
+        margin-top: 20px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        /* Stack comments vertically */
+        align-items: flex-start;
+        /* Align comments to the left */
+        gap: 10px;
+        /* Add spacing between comments */
+        
+
+        .commentContainer {
+          margin-top: 8px;
+          margin-right: 5px;
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+          padding: 10px;
+          border-radius: 8px;
+          background-color: #afa9c8;
+          width: 100%;
+          /* Match the width of the parent .commentsContainer */
+          
+
+          .userComment {
+            font-weight: 600;
+            font-size: 16px;
+            color: #070707;
+            letter-spacing: 0.5px;
+            margin-right: 8px;
+          }
+
+          .commentText {
+            font-size: 14px;
+            color: #000000;
+          }
+        }
+      }
+    }
+  }
+}

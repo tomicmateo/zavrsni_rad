@@ -1,0 +1,15 @@
+.appContainer {
+  padding: 40px;
+  background-color: lightslategrey;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+
+/* Style for mobile devices */
+@media (max-width: 768px) {
+  .appContainer {
+    flex-direction: column;
+    padding: 20px;
+  }
+}

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Entity: User -->
+    <changeSet id="01-01" author="tomicmateo">
+        <createTable tableName="user">
+            <column name="user_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="profile-picture" type="BLOB" />
+            <column name="bio" type="varchar(1000)" />
+            <column name="email" type="varchar(255)">
+                <constraints  unique="true" nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Entity: Post -->
+    <changeSet id="01-02" author="tomicmateo">
+        <createTable tableName="post">
+            <column name="post_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints foreignKeyName="fk_post_user"
+                             referencedTableName="user"
+                             referencedColumnNames="user_id"
+                             nullable="false" />
+            </column>
+            <column name="content" type="varchar(1000)">
+                <constraints nullable="false" />
+            </column>
+            <column name="timestamp" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+            <column name="likes_count" type="int" defaultValue="0" />
+            <column name="comments_count" type="int" defaultValue="0" />
+        </createTable>
+    </changeSet>
+
+    <!-- Entity<: PostLike -->
+    <changeSet id="01-03" author="tomicmateo">
+        <createTable tableName="like">
+            <column name="like_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints foreignKeyName="fk_like_user"
+                             referencedTableName="user"
+                             referencedColumnNames="user_id"
+                             nullable="false" />
+            </column>
+            <column name="post_id" type="bigint">
+                <constraints foreignKeyName="fk_like_post"
+                             referencedTableName="post"
+                             referencedColumnNames="post_id"
+                             nullable="false" />
+            </column>
+            <column name="timestamp" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Entity: Comment -->
+    <changeSet id="01-04" author="tomicmateo">
+        <createTable tableName="comment">
+            <column name="comment_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints foreignKeyName="fk_comment_user"
+                             referencedTableName="user"
+                             referencedColumnNames="user_id"
+                             nullable="false" />
+            </column>
+            <column name="post_id" type="bigint">
+                <constraints foreignKeyName="fk_comment_post"
+                             referencedTableName="post"
+                             referencedColumnNames="post_id"
+                             nullable="false" />
+            </column>
+            <column name="content" type="varchar(1000)">
+                <constraints nullable="false" />
+            </column>
+            <column name="timestamp" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Entity: Follower -->
+    <changeSet id="01-05" author="tomicmateo">
+        <createTable tableName="follow">
+            <column name="follower_id" type="bigint">
+                <constraints foreignKeyName="fk_follower_user_id"
+                             referencedTableName="user"
+                             referencedColumnNames="user_id"
+                             nullable="false" />
+            </column>
+            <column name="followee_id" type="bigint">
+                <constraints foreignKeyName="fk_followee_user_id"
+                             referencedTableName="user"
+                             referencedColumnNames="user_id"
+                             nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="01-06" author="tomicmateo">
+        <renameColumn tableName="user" oldColumnName="profile-picture" newColumnName="profile_picture" columnDataType="BLOB" />
+    </changeSet>
+
+    <changeSet id="01-07" author="tomicmateo">
+        <renameTable oldTableName="like" newTableName="post_like"/>
+    </changeSet>
+
+    <changeSet id="01-08" author="tomicmateo">
+        <addColumn tableName="follow">
+            <column name="id" type="bigint" >
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="01-09" author="tomicmateo">
+        <dropColumn tableName="follow" columnName="id"/>
+        <addColumn tableName="follow">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

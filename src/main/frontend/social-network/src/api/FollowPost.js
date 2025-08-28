@@ -1,0 +1,35 @@
+import axios from "axios";
+import { apiUrl } from "./Config";
+
+export const followUser = async (user1Id, user2Id) => {
+  console.log("Provjera vrijednosti2 Id", user1Id, user2Id);
+
+  if (!user1Id || !user2Id) {
+    console.error("Error: Both user IDs must be provided");
+    return;
+  }
+
+  try {
+    const response = await axios.post(`${apiUrl}/api/follow/createFollow`, {
+      followerId: user1Id,
+      followeeId: user2Id,
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error following the user:", error);
+    throw error;
+  }
+};
+
+export const hasFollowedUser = async (followerId, followeeId) => {
+  try {
+    const response = await axios.get(`${apiUrl}/api/follow/hasFollowed`, {
+      params: { followerId, followeeId },
+    });
+    return response.data.hasFollowed;
+  } catch (error) {
+    console.error("Error checking if user has followed:", error);
+    throw error;
+  }
+};
